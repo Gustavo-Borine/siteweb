@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     if (window.location.pathname.includes("pedido.html")) {
         if (localStorage.getItem("logado") !== "true") {
-            window.location.href = "login.html"; // redireciona se não logado
+            window.location.href = "login.html"; 
         }
     }
 });
