@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// ----------- BLOQUEIO PEDIDO.HTML -----------
+// ----------- BLOQUEIO -----------
 document.addEventListener("DOMContentLoaded", () => {
     if (window.location.pathname.includes("pedido.html")) {
         if (localStorage.getItem("logado") !== "true") {
