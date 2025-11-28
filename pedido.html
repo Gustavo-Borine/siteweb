@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="main.css">
+  <title>Pedido - ChipStore</title>
+  <script src="script.js"></script>
+</head>
+
+<body>
+
+    <body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">ChipStore</div>
+        <ul class="nav-menu">
+         <li><a href="index.html#sobre">Sobre Nós</a></li>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#produtos">Produtos</a></li>
+          <li><a href="index.html#contato"> Fale Conosco</a></li>
+         <li><a href="index.html#avaliacoes"> Avaliações</a></li>
+        </ul>
+
+      </nav>
+    </div>
+  </header>
+
+  <section id="pedido">
+    <h2>Monte seu Pedido</h2>
+
+    <div >
+
+      <!-- LISTA DE PRODUTOS -->
+      <div >
+        <h3>Produtos</h3>
+
+        <div class="produto">
+          <img src="https://images4.kabum.com.br/produtos/fotos/700804/placa-de-video-rog-astral-gaming-geforce-rtx5090-oc-nvidia-32gb-gddr7-argb-90yv0lw0-m0na00_1737724637_gg.jpg" width="150">
+          <p><strong>Placa De Vídeo Asus RTX5090 Rog Astral Gaming Oc Nvidia Geforce, 32gb, Gddr7, ARGB, G-sync, Ray Tracing, Dlss 4, Hdr - 90yv0lw0-m0na00</strong></p>
+          <p>R$ 25.796,40</p>
+          <button class="btn-success" onclick="add(0)">Adicionar</button>
+        </div>
+
+        <hr>
+
+        <div class="produto">
+          <img src="https://images.kabum.com.br/produtos/fotos/114781/placa-mae-gigabyte-b550m-aorus-elite-amd-am4-micro-atx-ddr4_1594908595_gg.jpg" width="150">
+          <p><strong>Placa Mãe Gigabyte B550M AORUS Elite, Chipset B550, AMD AM4, mATX, DDR4</strong></p>
+          <p>R$ 759,51</p>
+          <button class="btn-success" onclick="add(1)">Adicionar</button>
+        </div>
+
+        <hr>
+
+        <div class="produto">
+          <img src="https://www.gigantec.com.br/media/catalog/product/p/r/processador-intel-core-i9-14900kf-36-ghz-60ghz-turbo-14-geracao-24-cores-32-threads-lga-1700-bx8071514900kf-002.jpg" width="150">
+          <p><strong>Processador Intel Core i9-14900K, 14ª Geração, 6GHz Max Turbo, Cache 36MB, 24 Núcleos, 32 Threads, LGA1700 - BX8071514900K</strong></p>
+          <p>R$ 3.044,99</p>
+          <button class="btn-success" onclick="add(2)">Adicionar</button>
+        </div>
+      </div>
+
+      <!-- CARRINHO -->
+      <div >
+        <h3>Seu Pedido</h3>
+        <div id="listaItens"></div>
+
+        <h3>Total: R$ <span id="total">0</span></h3>
+
+        <button class="btn-success" onclick="finalizar()">Finalizar Pedido</button>
+        <p id="msg"></p>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+
+  <!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-text">
+      ChipStore © Todos os direitos reservados para Jorge & Gustavo Borine
+    </div>
+
+    <div class="redes-footer">
+      <a href="https://wa.me/SEUNUMERO" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
+      </a>
+
+      <a href="https://instagram.com/SEUINSTAGRAM" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
+      </a>
+
+      <a href="https://facebook.com/SEUFACEBOOK" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook">
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+</html>
