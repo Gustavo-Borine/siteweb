@@ -1,8 +1,4 @@
-// =====================================
-//  SCRIPT GLOBAL PARA TODO O SITE
-// =====================================
-
-// ----------- BOTÕES "COMPRAR" NO INDEX (redirecionam ao login) -----------
+// ----------- BOTÕES "COMPRAR" NO INDEX -----------
 document.addEventListener("DOMContentLoaded", () => {
     const botoesCompra = document.querySelectorAll(".btn-venda");
     botoesCompra.forEach(btn => {
@@ -24,19 +20,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// =====================================
-//  LOGIN (login.html)
-// =====================================
-
+//  LOGIN 
 document.addEventListener("DOMContentLoaded", () => {
     const formLogin = document.getElementById("formLogin");
 
     if (formLogin) {
-        const usuario = "Gustavo";     // SEU NOME
-        const matricula = "1291392522040";    // SUA MATRÍCULA
+        const usuario = "Gustavo";     
+        const matricula = "1291392522040";   
 
-        const usuario2 = "Jorge";     // SEU NOME
-        const matricula2 = "1291392522021";    // SUA MATRÍCULA
+        const usuario2 = "Jorge";     
+        const matricula2 = "1291392522021";   
 
         formLogin.addEventListener("submit", function(e) {
             e.preventDefault();
@@ -59,12 +52,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// =====================================
-//  PEDIDO / CARRINHO (pedido.html)
-// =====================================
-
+// ----------- BLOQUEIO PEDIDO.HTML -----------
 document.addEventListener("DOMContentLoaded", () => {
-    // Só executa se estiver na página pedido.html
+    if (window.location.pathname.includes("pedido.html")) {
+        if (localStorage.getItem("logado") !== "true") {
+            window.location.href = "login.html"; // redireciona se não logado
+        }
+    }
+});
+
+//  PEDIDO / CARRINHO 
+document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("listaItens")) {
 
         const produtos = [
@@ -78,7 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let carrinho = [];
 
-        // Função global para poder ser chamada pelo HTML
         window.add = function(i) {
             carrinho.push(produtos[i]);
             atualizar();
@@ -119,4 +116,5 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Pedido finalizado com sucesso!");
         }
     }
+
 });
