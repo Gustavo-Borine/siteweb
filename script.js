@@ -1,4 +1,6 @@
-// ----------- BOTÕES "COMPRAR" NO INDEX -----------
+// =====================================
+//  BOTÕES "COMPRAR" NO INDEX
+// =====================================
 document.addEventListener("DOMContentLoaded", () => {
     const botoesCompra = document.querySelectorAll(".btn-venda");
     botoesCompra.forEach(btn => {
@@ -8,7 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// ----------- FORMULÁRIO DE CONTATO (INDEX) -----------
+// =====================================
+//  FORMULÁRIO DE CONTATO (INDEX)
+// =====================================
 document.addEventListener("DOMContentLoaded", () => {
     const formContato = document.querySelector(".contact-form");
     if (formContato) {
@@ -20,16 +24,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-//  LOGIN 
+// =====================================
+//  LOGIN
+// =====================================
 document.addEventListener("DOMContentLoaded", () => {
     const formLogin = document.getElementById("formLogin");
 
     if (formLogin) {
-        const usuario = "Gustavo";     
-        const matricula = "1291392522040";   
-
-        const usuario2 = "Jorge";     
-        const matricula2 = "1291392522021";   
+        // Usuários válidos
+        const usuariosValidos = [
+            { usuario: "Gustavo", senha: "1291392522040" },
+            { usuario: "Jorge",   senha: "1291392522021" }
+        ];
 
         formLogin.addEventListener("submit", function(e) {
             e.preventDefault();
@@ -43,7 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            if ((senha === matricula && usuario == "Gustavo" )|| (senha === matricula2 && usuario2 == "Jorge")) {
+            // Verifica se usuário e senha existem no sistema
+            const encontrado = usuariosValidos.find(
+                u => u.usuario === email && u.senha === senha
+            );
+
+            if (encontrado) {
+                localStorage.setItem("logado", "true"); // Salva login
                 window.location.href = "pedido.html";
             } else {
                 erro.innerText = "Usuário ou senha incorretos.";
@@ -52,28 +64,52 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// =====================================
+//  BLOQUEIO DE PÁGINA (pedido.html)
+// =====================================
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.location.pathname.includes("pedido.html")) {
+        if (localStorage.getItem("logado") !== "true") {
+            window.location.href = "login.html"; 
+        }
+    }
+});
 
-
-//  PEDIDO / CARRINHO 
+// =====================================
+//  PEDIDO / CARRINHO
+// =====================================
 document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("listaItens")) {
 
         const produtos = [
-            { nome: "Placa De Vídeo Asus RTX5090 Rog Astral Gaming Oc Nvidia Geforce, 32gb, Gddr7, ARGB, G-sync, Ray Tracing, Dlss 4, Hdr - 90yv0lw0-m0na00", preco: 25796.40, img: "https://images4.kabum.com.br/produtos/fotos/700804/placa-de-video-rog-astral-gaming-geforce-rtx5090-oc-nvidia-32gb-gddr7-argb-90yv0lw0-m0na00_1737724637_gg.jpg"  },
+            {
+                nome: "Placa De Vídeo Asus RTX5090 Rog Astral Gaming Oc Nvidia Geforce, 32gb, Gddr7, ARGB, G-sync, Ray Tracing, Dlss 4, Hdr - 90yv0lw0-m0na00",
+                preco: 25796.40,
+                img: "https://images4.kabum.com.br/produtos/fotos/700804/placa-de-video-rog-astral-gaming-geforce-rtx5090-oc-nvidia-32gb-gddr7-argb-90yv0lw0-m0na00_1737724637_gg.jpg"
+            },
 
-            { nome: "Placa Mãe Gigabyte B550M AORUS Elite, Chipset B550, AMD AM4, mATX, DDR4", preco: 759.51, img: "https://images.kabum.com.br/produtos/fotos/114781/placa-mae-gigabyte-b550m-aorus-elite-amd-am4-micro-atx-ddr4_1594908595_gg.jpg" },
+            {
+                nome: "Placa Mãe Gigabyte B550M AORUS Elite, Chipset B550, AMD AM4, mATX, DDR4",
+                preco: 759.51,
+                img: "https://images.kabum.com.br/produtos/fotos/114781/placa-mae-gigabyte-b550m-aorus-elite-amd-am4-micro-atx-ddr4_1594908595_gg.jpg"
+            },
 
-            { nome: "Processador Intel Core i9-14900K, 14ª Geração, 6GHz Max Turbo, Cache 36MB, 24 Núcleos, 32 Threads, LGA1700 - BX8071514900K", preco: 3044.99, img: "https://www.gigantec.com.br/media/catalog/product/p/r/processador-intel-core-i9-14900kf-36-ghz-60ghz-turbo-14-geracao-24-cores-32-threads-lga-1700-bx8071514900kf-002.jpg" }
-
+            {
+                nome: "Processador Intel Core i9-14900K, 14ª Geração, 6GHz Max Turbo, Cache 36MB, 24 Núcleos, 32 Threads, LGA1700 - BX8071514900K",
+                preco: 3044.99,
+                img: "https://www.gigantec.com.br/media/catalog/product/p/r/processador-intel-core-i9-14900kf-36-ghz-60ghz-turbo-14-geracao-24-cores-32-threads-lga-1700-bx8071514900kf-002.jpg"
+            }
         ];
 
         let carrinho = [];
 
+        // Adicionar item
         window.add = function(i) {
             carrinho.push(produtos[i]);
             atualizar();
         }
 
+        // Remover item
         window.remover = function(i) {
             carrinho.splice(i, 1);
             atualizar();
@@ -92,15 +128,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 lista.innerHTML += `
                     <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
                         <img src="${item.img}" width="60">
-                        <p>${item.nome} — R$ ${item.preco}</p>
-                        <button onclick="remover(${index})" style="background:red;color:white;padding:5px;border-radius:5px;">X</button>
+                        <p>${item.nome} — R$ ${item.preco.toFixed(2)}</p>
+                        <button onclick="remover(${index})" 
+                        style="background:red;color:white;padding:5px;border-radius:5px;cursor:pointer;">X</button>
                     </div>
                 `;
             });
 
-            totalEl.innerText = total;
+            totalEl.innerText = total.toFixed(2);
         }
 
+        // Finalizar pedido
         window.finalizar = function() {
             if (carrinho.length === 0) {
                 alert("O carrinho está vazio!");
@@ -109,5 +147,4 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Pedido finalizado com sucesso!");
         }
     }
-
 });
